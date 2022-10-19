@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-purple font-sans p-0 m-0;
+  }
+
+  h1 {
+    @apply text-babyPink font-bold leading-none mt-0 mx-0 mb-5 p-0 text-[2rem];
+  }
+
+  input[type=text]:not(.list-input),
+  input[type=email],
+  input[type=password] {
+    @apply bg-violet border border-electricIndigo box-border text-white font-sans text-base h-16 leading-relaxed mb-5 outline-none py-0 px-6 w-full rounded-2xl
+  }
+
+  svg {
+    @apply fill-current;
+  }
+
+  ::placeholder {
+    @apply text-melrose
+  }
+}
+
+@layer components {
+
+  @keyframes fadeInOut {
+    from {
+      opacity: 0;
+    }
+
+    25% {
+      opacity: .5;
+    }
+
+    75% {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .stars-1 {
+    animation-duration: 5s;
+    animation-delay: -2s;
+  }
+
+  .stars-2 {
+    animation-duration: 10s;
+  }
+
+  .stars-3 {
+    animation-duration: 15s;
+    animation-delay: -10s;
+  }
+
+  .stars-1,
+  .stars-2,
+  .stars-3 {
+    animation-name: fadeInOut;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  /* checkbox */
+  .task {
+    @apply hidden;
+  }
+
+  /* pseudo checkbox - unchecked */
+  .task + .task-name::before {
+    @apply bg-babyPink rounded-full w-8 h-8 block;
+    content: '';
+  }
+
+  /* psuedo checkbox - checked */
+  .task:checked + .task-name::before {
+    @apply bg-electricIndigo bg-check bg-no-repeat bg-center;
+  }
+
+  /* task name - unchecked */
+  .task-name {
+    @apply flex gap-5 items-center cursor-pointer;
+  }
+
+  /* task name - checked */
+  .task:checked + .task-name {
+    @apply line-through text-stormGray;
+  }
+
+  .icon-button {
+    @apply text-lilacBush hover:text-goldenTainoi cursor-pointer;
+  }
+}
+
+@layer utilities {
+  .center {
+    @apply flex justify-center items-center;
+  }
+}
