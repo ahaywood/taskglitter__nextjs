@@ -3,6 +3,7 @@ import { Icon } from '@/modules/shared/icon'
 import type { Prisma } from '@prisma/client'
 import Link from "next/link"
 import { useForm } from "react-hook-form";
+import { DeleteButton } from '@/modules/shared/DeleteButton';
 
 interface Props {
   project: Prisma.ProjectsSelect
@@ -50,8 +51,8 @@ const Project = ({ project, refreshData }: Props) => {
         <div className="flex justify-between items-center gap-x-5 w-full">
           <Link href={`/${project.id}`}><a className="text-6xl font-bold text-white hover:text-goldenTainoi border-b border-transparent">{project.name}</a></Link>
           <div className="flex gap-4">
-            <button className="icon-button w-[42px] h-[42px]" onClick={ () => setProjectState('edit') }><Icon name="edit" /></button>
-            <button className="icon-button w-[42px] h-[42px]" onClick={deleteProject}><Icon name="Trash" /></button>
+            <button className="icon-button w-[42px] h-[42px]" onClick={ () => setProjectState('edit') }><Icon name="Edit" /></button>
+            <DeleteButton deleteItem={deleteProject} />
           </div>
         </div>
       )}

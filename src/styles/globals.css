@@ -100,6 +100,15 @@
   .icon-button {
     @apply text-lilacBush hover:text-goldenTainoi cursor-pointer;
   }
+
+  .tag-left {
+    @apply relative
+  }
+
+  .tag-left::before {
+    content: '';
+    @apply block border-solid border-r-lavenderIndigo border-r-[12px] border-y-transparent border-y-[12px] border-l-0 absolute -left-2 top-[20px]
+  }
 }
 
 @layer utilities {
