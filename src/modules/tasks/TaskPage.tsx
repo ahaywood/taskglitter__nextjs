@@ -14,7 +14,18 @@ interface Props {
 const TaskPage = ({ projectId, projectName, refreshData, tasks }: Props) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      const body = { name: data.taskName, projectId: data.projectId };
+      await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      refreshData();
+      reset();
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -31,14 +42,15 @@ const TaskPage = ({ projectId, projectName, refreshData, tasks }: Props) => {
       {/* add tasks */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex gap-5">
         <input type="text" {...register("taskName", { required: true })} />
+        <input type="hidden" {...register('projectId')} value={projectId} />
         <div>
           <button type="submit" role="submit" className="text-white hover:text-persianBlue bg-persianBlue hover:bg-goldenTainoi rounded-full w-[57px] h-[57px] flex justify-center items-center"><Icon name="Plus" /></button>
         </div>
       </form>
 
       {/* task list */}
-      {tasks && tasks.map((task, index) => (
-        <Task key={index} task={task} />
+      {tasks && tasks.map((task) => (
+        <Task key={task.id} task={task} refreshData={refreshData} />
       ))}
     </div>
   )

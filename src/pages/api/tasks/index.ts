@@ -7,7 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const result = await prisma.tasks.create({
     data: {
       name,
-      projectId
+      project: {
+        connect: {
+          id: parseInt(projectId)
+        }
+      }
     },
   });
 

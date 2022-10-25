@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 import { GetServerSideProps } from "next";
 import Head from 'next/head'
 import { useRouter } from "next/router";
+import { safeJson } from "@/lib/formatHelpers";
 
 interface Props {
   project: Prisma.ProjectsSelect
@@ -43,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
   }
 
-  const project = await prisma.projects.findUnique({
+  let project = await prisma.projects.findUnique({
     where: {
       id: Number(params.id),
     },
@@ -52,7 +53,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
   })
 
+  project = safeJson(project);
+
   return {
-    props: { project },
+    props: { project: project },
   };
 };

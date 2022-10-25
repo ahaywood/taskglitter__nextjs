@@ -27,7 +27,7 @@ const Project = ({ project, refreshData }: Props) => {
         body: JSON.stringify(body),
       });
       refreshData();
-    setProjectState('view');
+      setProjectState('view');
     } catch (error) {
       console.log(error)
     }
