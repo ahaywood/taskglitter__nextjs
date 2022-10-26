@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client'
+import type { Tasks } from '@prisma/client'
 import { Icon } from "@/modules/shared/icon"
 import { useRef, useState } from "react";
 import { formatDate } from '@/lib/formatHelpers';
@@ -6,14 +6,14 @@ import { DeleteButton } from '@/modules/shared/DeleteButton';
 import { useForm } from 'react-hook-form';
 
 interface Props {
-  task: Prisma.TasksSelect
+  task: Tasks
   refreshData: () => void
 }
 
 const Task = ({ task, refreshData }: Props) => {
   const [taskState, setTaskState] = useState<'view' | 'edit'>('view');
   const { register, handleSubmit, reset, formState: { errors }, setFocus } = useForm();
-  const checkbox = useRef(null);
+  const checkbox = useRef<HTMLInputElement>(null);
 
   console.log({ task });
 
@@ -32,7 +32,7 @@ const Task = ({ task, refreshData }: Props) => {
   }
 
   const toggleComplete = () => {
-    if (checkbox.current.checked) completeTask();
+    if (checkbox?.current?.checked) completeTask();
     else incompleteTask();
   }
 

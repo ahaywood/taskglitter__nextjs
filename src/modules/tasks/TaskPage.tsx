@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client'
+import type { Tasks } from '@prisma/client'
 import Link from 'next/link'
 import { Icon } from '../shared/icon'
 import { Task } from './components/Task'
@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 interface Props {
   projectName: string
   projectId: number
-  tasks: Prisma.TasksSelect[]
+  tasks: Tasks[]
   refreshData: () => void
 }
 
