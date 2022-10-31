@@ -41,8 +41,8 @@ const ProjectPage = ({projects, refreshData}: Props) => {
 
       {/* project list */}
       <ul>
-        {projects && projects.map((project, index) => (
-          <li className="w-full flex justify-between mb-5" key={index}>
+        {projects && projects.map((project) => (
+          <li className="w-full flex justify-between mb-5" key={project.id}>
             <Project project={project} refreshData={refreshData} />
           </li>
         ))}
